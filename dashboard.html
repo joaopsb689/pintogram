@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PythonGram - Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .post {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .post img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .post p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PythonGram - Welcome</h1>
+    <h2>Posts from Everyone</h2>
+
+    <div id="postsContainer"></div>
+    <script>
+        const currentUser = localStorage.getItem('currentUser');
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+        // Show posts from everyone
+        function displayPosts() {
+            const postsContainer = document.getElementById('postsContainer');
+            postsContainer.innerHTML = '';
+            posts.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+                postDiv.innerHTML = `
+                    <p><strong>${post.username}</strong>: ${post.description}</p>
+                    <img src="${post.image}" alt="Post Image">
+                `;
+                postsContainer.appendChild(postDiv);
+            });
+        }
+
+        // Load posts
+        displayPosts();
+    </script>
+</body>
+</html>
